@@ -7,6 +7,7 @@ from pathlib import Path, PurePath
 from typing import List
 from urllib.parse import urlparse
 from urllib.request import urlretrieve
+from urllib.error import URLError
 
 import click
 import humanfriendly
@@ -25,8 +26,23 @@ def fetch_torrent_file(ctx: Ctx, data: TorrentFileData, depth=0):
     parent.mkdir(parents=True, exist_ok=True)
     expected_path = parent / filename
     data.path = os.path.abspath(expected_path)
-    if not expected_path.exists():
-        urlretrieve(data.link, expected_path)
+    from socket import gaierror
+    try:
+        if not expected_path.exists():
+            urlretrieve(data.link, expected_path)
+    except URLError as err:
+        print("..................")
+        print("..................")
+        print("..................")
+        print("Cannot fetch data.link:", data.link)
+        e = sys.exc_info()[0]
+        click.secho(
+            f"Failed to fetch LibGen torrent from url: {data.link}\n.",
+                fg="red",
+                reset=False,
+            )
+        raise err
+
     try:
         tf = torrentool.api.Torrent.from_file(str(expected_path))
         if tf.info_hash != data.infohash:
@@ -66,6 +82,9 @@ def load_torrent_data(
     with open(jsonfilepath) as f:
         raw = json.load(f)
         for d in raw:
+            print("TYPE:", type(d))
+            d.setdefault('path', None)
+            d.setdefault('ipfs_cid', None)
             data.append(TorrentFileData(**d))
     return data
 

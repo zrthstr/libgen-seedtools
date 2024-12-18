@@ -1,0 +1,5 @@
+click_aliases==1.0.5
+humanfriendly==10.0
+setuptools==69.0.3
+torrentool==1.2.0
+transmission_rpc==7.0.11

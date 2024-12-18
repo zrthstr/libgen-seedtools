@@ -4,3 +4,4 @@ mypy
 twine
 mkdocs
 mkdocs-material
+setuptools
