@@ -19,41 +19,40 @@ from .transmission import add_torrent as transmission_add_torrent
 
 jsonfilepath = "./torrent_data.json"
 
-
-def fetch_torrent_file(ctx: Ctx, data: TorrentFileData, depth=0):
-    filename = Path(data.link).name
-    parent = Path(ctx.config.settings.torrent_files_dir)
-    parent.mkdir(parents=True, exist_ok=True)
-    expected_path = parent / filename
-    data.path = os.path.abspath(expected_path)
-    from socket import gaierror
-    try:
-        if not expected_path.exists():
-            urlretrieve(data.link, expected_path)
-    except URLError as err:
-        print("..................")
-        print("..................")
-        print("..................")
-        print("Cannot fetch data.link:", data.link)
-        e = sys.exc_info()[0]
-        click.secho(
-            f"Failed to fetch LibGen torrent from url: {data.link}\n.",
-                fg="red",
-                reset=False,
-            )
-        raise err
-
-    try:
-        tf = torrentool.api.Torrent.from_file(str(expected_path))
-        if tf.info_hash != data.infohash:
-            raise ValueError(f"Info hash does not match for {filename}")
-    except AttributeError as err:
-        if depth == 0:
-            os.remove(expected_path)
-            return fetch_torrent_file(ctx, data, 1)
-        else:
-            raise err
-
+#
+#def fetch_torrent_file(ctx: Ctx, data: TorrentFileData, depth=0):
+#    filename = Path(data.link).name
+#    parent = Path(ctx.config.settings.torrent_files_dir)
+#    parent.mkdir(parents=True, exist_ok=True)
+#    expected_path = parent / filename
+#    data.path = os.path.abspath(expected_path)
+#    try:
+#        if not expected_path.exists():
+#            urlretrieve(data.link, expected_path)
+#    except URLError as err:
+#        print("..................")
+#        print("..................")
+#        print("..................")
+#        print("Cannot fetch data.link:", data.link)
+#        e = sys.exc_info()[0]
+#        click.secho(
+#            f"Failed to fetch LibGen torrent from url: {data.link}\n.",
+#                fg="red",
+#                reset=False,
+#            )
+#        raise err
+#
+#    try:
+#        tf = torrentool.api.Torrent.from_file(str(expected_path))
+#        if tf.info_hash != data.infohash:
+#            raise ValueError(f"Info hash does not match for {filename}")
+#    except AttributeError as err:
+#        if depth == 0:
+#            os.remove(expected_path)
+#            return fetch_torrent_file(ctx, data, 1)
+#        else:
+#            raise err
+#
 
 def http_get_with_failover(urls: List[str]) -> List:
     for url in urls:
@@ -82,9 +81,7 @@ def load_torrent_data(
     with open(jsonfilepath) as f:
         raw = json.load(f)
         for d in raw:
-            print("TYPE:", type(d))
             d.setdefault('path', None)
-            d.setdefault('ipfs_cid', None)
             data.append(TorrentFileData(**d))
     return data
 
@@ -98,7 +95,9 @@ def fetchall(ctx: Ctx, update_list=False, dry_run=False, auto_verify=False) -> N
     click.secho("Loading torrent data.", bold=True, fg="black")
     filedata = sorted(
         load_torrent_data(ctx, jsonfilepath, force=update_list),
-        key=lambda x: int(re.search("\d+", x.name)[0]),
+        # we cannot assume that there is a file containing a number
+        #key=lambda x: int(re.search("\d+", x.name)[0]),   
+        key=lambda x: x.infohash,
     )
 
     seeders_arr = [x.seeders for x in filedata]
@@ -174,14 +173,15 @@ def fetchall(ctx: Ctx, update_list=False, dry_run=False, auto_verify=False) -> N
     )
     with click.progressbar(
         filtered_filedata,
-        label="Fetching torrent files...",
+        label="NOT Fetching torrent files..., using btih now .. ",
         item_show_func=itemshowfunc,
     ) as bar:
         for row in bar:
             if dry_run:
                 click.secho(f"dry run: adding {row.name}: {row.type}: {row.infohash}")
             else:
-                fetch_torrent_file(ctx, row)
+                # do not fetch torrent, use btih instead
+                #fetch_torrent_file(ctx, row)
                 if ctx.config.torrent.enabled:
                     torrents.append(transmission_add_torrent(ctx, row, auto_verify))
                 bytecount += row.size_bytes

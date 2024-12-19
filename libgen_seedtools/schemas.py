@@ -17,7 +17,6 @@ class TorrentFileData(BaseModel):
     leechers: int
     size_bytes: int
     type: str
-    ipfs_cid: Union[str, None]
     path: Union[str, None]
 
 
@@ -40,29 +39,21 @@ class TorrentConfigSchema(BaseModel):
     connection_settings: TorrentConnectionSettings = TorrentConnectionSettings()
 
 
-class IpfsConfigSchema(BaseModel):
-    enabled: bool = False
-    connection_settings: Dict[str, Any] = {"addr": "/dns/localhost/tcp/5001/http"}
-
-
 class SettingsSchema(BaseModel):
     torrent_files_dir: str = "./libgen-seedtools-data/torrentfiles"
     assets_dir: str = "./libgen-seedtools-data/data"
     torrent_data_url: List[str] = [
         "https://zrthstr.github.io/libgen_torrent_cardiography/torrent.json",
     ]
-    max_disk_usage: str = "2TB"
+    max_disk_usage: str = "100GB"
     default_source: str = "torrent"
     include_types: List[str] = ["fiction", "books", "scimag"]
     torrent_seeders_range: List[int] = [1, 3]
-    ipfs_seeders_range: List[int] = [1, 3]
-    ipfs_default_hash_algo: str = "blake2b-256"
 
 
 class ConfigSchema(BaseModel):
-    version: float = 1.0
+    version: float = 2.0
     torrent: TorrentConfigSchema = TorrentConfigSchema()
-    ipfs: IpfsConfigSchema = IpfsConfigSchema()
     settings: SettingsSchema = SettingsSchema()
 
 

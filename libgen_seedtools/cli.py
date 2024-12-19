@@ -30,11 +30,20 @@ def cli(ctx, config):
     )
 
 
+transmission_default_url = "http://127.0.0.1:9091"
 @cli.command(name="generate-config")
+@click.option("-t",
+              "--transmission-url",
+              type=str,
+              default=transmission_default_url,
+              help=f"Transmission URL, default: '{transmission_default_url}'."
+              )
+
 @click.pass_obj
-def generate_config(ctx):
+def generate_config(ctx, transmission_url):
+    ctx.config.torrent.connection_settings.url = transmission_url
     save(ctx)
-    click.secho(f"generated {ctx.configPath}", fg="green")
+    click.secho(f"generated {ctx.configPath} with transmission URL {transmission_url}", fg="green")
     click.secho(f"Edit this file, then run the fetch command")
 
 

@@ -5,3 +5,6 @@ twine
 mkdocs
 mkdocs-material
 setuptools
+docker
+pytest
+transmissionrpc
