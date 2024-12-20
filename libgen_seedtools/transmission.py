@@ -2,7 +2,6 @@ import click
 
 from datetime import datetime
 from urllib.parse import urlparse
-from pathlib import Path
 
 from pytz import utc
 from transmission_rpc import client, torrent

@@ -52,7 +52,7 @@ class SettingsSchema(BaseModel):
 
 
 class ConfigSchema(BaseModel):
-    version: float = 2.0
+    version: float = 1.1
     torrent: TorrentConfigSchema = TorrentConfigSchema()
     settings: SettingsSchema = SettingsSchema()
 

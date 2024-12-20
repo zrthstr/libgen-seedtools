@@ -19,13 +19,11 @@ setup(
     install_requires=[
         "click",
         "click-aliases",
-        "colorama",
         "humanfriendly",
         "pydantic",
         "pytz",
         "transmission-rpc",
         "requests",
-        "requests-toolbelt",
         "torrentool",
     ],
     license="MIT",

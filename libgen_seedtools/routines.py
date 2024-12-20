@@ -142,7 +142,7 @@ def fetchall(ctx: Ctx, update_list=False, dry_run=False, auto_verify=False) -> N
     ) as bar:
         for row in bar:
             if dry_run:
-                click.secho(f"dry run: adding {row.name}: {row.type}: {row.infohash}")
+                click.secho(f" dry run: adding {row.name}: {row.type}: {row.infohash}")
             else:
                 # do not fetch torrent, use btih instead
                 # fetch_torrent_file(ctx, row)
