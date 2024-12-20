@@ -1,40 +1,24 @@
-name: Release Test
+name: Release
 
 on:
-  workflow_dispatch: # Allows manual triggering
-    branches:
-      - cleanup
-      - testing
-    inputs:
-      python-version:
-        description: "Python version to use for testing"
-        required: true
-        default: "3.12"
+  release:
+    types: [created]
 
 jobs:
-  publish-test:
-    name: Publish to TestPyPI 🧪
+  publish:
+    name: Publish to PyPI ✨
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write # Required for OIDC authentication with PyPI
-
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
-
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
         with:
-          python-version: ${{ matrix.python-version }}
-          architecture: "x64"
+          python-version: '3.7'
+          architecture: 'x64'
 
       - run: pip install -U twine wheel setuptools
 
       - run: python setup.py sdist bdist_wheel
-      - run: |
-          twine upload --repository testpypi dist/*
+      - run: twine upload dist/*
         env:
-          TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
-
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
