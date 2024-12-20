@@ -2,8 +2,6 @@
 
 <img src="docs/seedtools.png" width="200">
 
-> In progress.  IPFS is not yet functional
-
 A python utility to fetch and seed a common dataset to both <s>IPFS and</s> a BitTorrent tracker. Designed to help individuals strengthen the Library Genesis collection, but written to be generally useful for mirroring between networks.
 
 [Read the LibGen IPFS Seeding Guide](https://freeread.org/ipfs/)
