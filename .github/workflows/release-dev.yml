@@ -7,23 +7,20 @@ jobs:
   pypi-publish:
     name: Publish to TestPyPI 🧪
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
     environment:
       name: pypi
       url: https://test.pypi.org/p/libgen-seedtools
     permissions:
-      id-token: write  # This permission is mandatory for trusted publishing
+      id-token: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
 
       - name: Install build dependencies
         run: |
@@ -31,7 +28,7 @@ jobs:
 
       - name: Build package
         run: |
-          python -m build  # This replaces setup.py sdist bdist_wheel
+          python -m build
 
       - name: Publish package distributions to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
