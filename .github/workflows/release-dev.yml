@@ -1,15 +1,7 @@
 name: Release Test
 
 on:
-  workflow_dispatch: # Allows manual triggering
-    branches:
-      - cleanup
-      - testing
-    inputs:
-      python-version:
-        description: "Python version to use for testing"
-        required: true
-        default: "3.12"
+  workflow_dispatch:
 
 jobs:
   publish-test:
