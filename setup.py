@@ -8,8 +8,8 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="libgen-seedtools",
-    author="Brandon Davis",
-    version="0.5.0",
+    author="Brandon Davis, zrthstr",
+    version="0.5.1",
     author_email="libgen-seedtools@subdavis.com",
     url="https://github.com/subdavis/libgen-seedtools",
     long_description=long_description,

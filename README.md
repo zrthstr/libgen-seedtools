@@ -13,7 +13,7 @@ pipx install libgen-seedtools
 pip3 install libgen-seedtools
 ```
 
-## Why I made this
+## Why this was made
 
 * The libgen librarians and maintainers don't provide enough guidance or strategy for regular people to help.
 * Without a unified strategy, seeding is random and inefficient, clustering at the ends.
