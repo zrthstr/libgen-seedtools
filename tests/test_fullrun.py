@@ -2,7 +2,7 @@ import subprocess
 import sys
 import time
 import json
-import transmissionrpc
+import transmission_rpc
 
 name = "libgen-seedtools"
 config_path = "/app/config.json"
