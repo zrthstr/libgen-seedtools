@@ -2,6 +2,9 @@ name: Release Test
 
 on:
   workflow_dispatch: # Allows manual triggering
+    branches:
+      - cleanup
+      - testing
     inputs:
       python-version:
         description: "Python version to use for testing"
