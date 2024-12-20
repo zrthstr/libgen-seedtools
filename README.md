@@ -4,7 +4,7 @@
 
 > In progress.  IPFS is not yet functional
 
-A python utility to fetch and seed a common dataset to both IPFS and a BitTorrent tracker. Designed to help individuals strengthen the Library Genesis collection, but written to be generally useful for mirroring between networks.
+A python utility to fetch and seed a common dataset to both <s>IPFS and</s> a BitTorrent tracker. Designed to help individuals strengthen the Library Genesis collection, but written to be generally useful for mirroring between networks.
 
 [Read the LibGen IPFS Seeding Guide](https://freeread.org/ipfs/)
 
@@ -35,7 +35,7 @@ It also lowers the tedious burden of organization.  Start seeding in just a few 
 The following are planned for the near future:
 
 * **Future: Clone a dataset**: Find files from a large dataset where some parts are available from ipfs and others from bittorrent.
-* **Future: Mirror from BitTorrent to IPFS** - If you only have a .torrent file, this tool will clone it in IPFS.  However, if you only have a CID, this tool will not create a torrent file.
+* <s>**Future: Mirror from BitTorrent to IPFS** - If you only have a .torrent file, this tool will clone it in IPFS.  However, if you only have a CID, this tool will not create a torrent file.</s>
 * **Future: meaningful metrics** - Get stats on how much you've seeded, and see how the network coverage changes over time.  Keep up with changing coverage by dropping well-seeded files and picking up more urgent ones.
 
 ## Usage
@@ -62,7 +62,7 @@ Searching for criteria:
   max_seeders:    3
   types:          ['fiction', 'books']
 Found 173 matches totaling 2 TB
-Fetching torrent files...  [####################################]  100%                                     
+Fetching torrent files...  [####################################]  100%
 Done
 ```
 
@@ -70,7 +70,7 @@ Done
 
 Provide a manifest file describing `.torrent` files. This tool will iterate the list, attempt to retreive the data from one network, then once it is successfully fetched, propogate it to the other.
 
-It is just a command-line script, not a service, so the user must initiate each "round" of checks.  If a torrent is added to transmission today and takes 4 hours to dowload, you'll have to come back 4 hours later and run another "round" to collect the newly completed data and pin it to your ipfs node.
+It is just a command-line script, not a service, so the user must initiate each "round" of checks.  If a torrent is added to transmission today and takes 4 hours to dowload, <s>you'll have to come back 4 hours later and run another "round" to collect the newly completed data and pin it to your ipfs node</s>.
 
 Ideally a scheduler like cron or systemd will run a round of checks at intervals
 
@@ -79,11 +79,11 @@ If users all attempt to seed the most-needed files first, eventually the network
 ## Prerequisites
 
 * A transmission torrent server
-* An ipfs server
+<s>* An ipfs server</s>
 
 If you aren't already running these, you can use the included docker-compose.  If you run these services on your own, you MUST have a shared data volume accessible from both services.
 
 ## Credit
 
 * To [LibGen Seeding Guide](https://freeread.org/)
-* To phillm.net for providing a seed tracking service
+* To phillm.net for providing a seed tracking service. Defunct as of 11.2024. Using [zrthstr's](https://zrthstr.github.io/libgen_torrent_cardiography/index.html) as of now.

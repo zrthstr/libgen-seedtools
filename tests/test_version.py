@@ -4,6 +4,7 @@ import sys
 
 name = "libgen-seedtools"
 
+
 def test_version():
     result = subprocess.run(
         [name, "--version"],
@@ -12,4 +13,3 @@ def test_version():
     )
     assert result.returncode == 0
     assert f"{name}, version" in result.stdout.lower()
-
