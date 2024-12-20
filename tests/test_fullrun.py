@@ -6,7 +6,7 @@ import transmissionrpc
 
 name = "libgen-seedtools"
 config_path = "/app/config.json"
-config_schema_version = 2.0
+config_schema_version = 1.1
 transmission_rpc_min_version = 16
 
 
