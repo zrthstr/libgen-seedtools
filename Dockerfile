@@ -5,7 +5,7 @@ ADD . /app
 WORKDIR /app
 
 RUN uv sync --frozen
-RUN uv build
+#RUN uv build
 #RUN uv run pytest
 ENV PATH="/app/.venv/bin:$PATH"
 
