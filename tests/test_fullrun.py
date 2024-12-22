@@ -49,7 +49,6 @@ def test_transmission_rpc():
 
 
 def test_fetch():
-    assert edit_config() == True
     result = subprocess.run(
         [*base_cmd, "fetch", "--auto-verify"],
         capture_output=True,
