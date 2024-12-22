@@ -4,18 +4,18 @@ CONTAINER_NAME = lgst-tests
 CONTAINER_BIN = docker
 COMPOSE = docker compose
 
-
 rm_test_data:
 	rm -rf libgen-seedtools-data/data/complete
 	rm -rf libgen-seedtools-data/data/incomplete
 
-
-test: rm_test_data
+transmission_up:
 	$(COMPOSE) up -d
-	$(CONTAINER_BIN) build -t $(CONTAINER_NAME) .
-	$(CONTAINER_BIN) run --rm $(CONTAINER_NAME)
+
+transmission_down:
 	$(COMPOSE) down
 
-
-shell:
-	$(CONTAINER_BIN) run --rm -it $(CONTAINER_NAME) /bin/bash
+test: rm_test_data
+	make transmission_up
+	rm ./tests/testconfig/config.json || true
+	uv run pytest
+	make transmission_down

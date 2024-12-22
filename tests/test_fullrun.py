@@ -2,10 +2,12 @@ import subprocess
 import sys
 import time
 import json
+import os
 import transmission_rpc
 
 name = "libgen-seedtools"
-config_path = "/app/config.json"
+config_path = os.path.join(os.getcwd(), "tests/testdata/config.json")
+base_cmd = [name, f'--config={config_path}'] 
 config_schema_version = 1.1
 transmission_rpc_min_version = 16
 
@@ -20,7 +22,8 @@ def edit_config():
 
 def test_config():
     result = subprocess.run(
-        [name, "generate-config", "-t", "http://172.17.0.1:9091"],
+        #[name, "generate-config", "-t", "http://172.17.0.1:9091"],
+        [*base_cmd, "generate-config", "-t", "http://172.17.0.1:9091"],
         capture_output=True,
         text=True,
     )
@@ -53,7 +56,7 @@ def test_transmission_rpc():
 def test_fetch():
     assert edit_config() == True
     result = subprocess.run(
-        [name, "fetch", "--auto-verify"],
+        [*base_cmd, "fetch", "--auto-verify"],
         capture_output=True,
         text=True,
     )
@@ -62,7 +65,7 @@ def test_fetch():
 
 def test_dryrun():
     result = subprocess.run(
-        [name, "fetch", "--dry-run"],
+        [*base_cmd, "fetch", "--dry-run"],
         capture_output=True,
         text=True,
     )
