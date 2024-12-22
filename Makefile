@@ -12,7 +12,7 @@ transmission_up:
 	$(COMPOSE) up -d
 
 transmission_down:
-	$(COMPOSE) down
+	$(COMPOSE) down && true
 
 test: rm_test_data
 	echo "DEBUG: pwd -"
