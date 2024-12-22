@@ -21,6 +21,10 @@ def edit_config():
 
 
 def test_config():
+    print("DDDDDD:")
+
+    print([*base_cmd, "generate-config", "-t", "http://172.17.0.1:9091"])
+ 
     result = subprocess.run(
         #[name, "generate-config", "-t", "http://172.17.0.1:9091"],
         [*base_cmd, "generate-config", "-t", "http://172.17.0.1:9091"],
