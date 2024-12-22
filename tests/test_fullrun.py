@@ -11,23 +11,13 @@ base_cmd = [name, f'--config={config_path}']
 config_schema_version = 1.1
 transmission_rpc_min_version = 16
 
-def edit_config():
-    with open(config_path, "r") as file:
-        config = json.load(file)
-    config["torrent"]["connection_settings"]["url"] = "http://172.17.0.1:9091"
-    with open(config_path, "w") as file:
-        json.dump(config, file, indent=2)
-    return True
-
-
 def test_config():
     print("DDDDDD:")
 
-    print([*base_cmd, "generate-config", "-t", "http://172.17.0.1:9091"])
+    print([*base_cmd, "generate-config"])
  
     result = subprocess.run(
-        #[name, "generate-config", "-t", "http://172.17.0.1:9091"],
-        [*base_cmd, "generate-config", "-t", "http://172.17.0.1:9091"],
+        [*base_cmd, "generate-config"],
         capture_output=True,
         text=True,
     )
@@ -51,7 +41,7 @@ def test_version():
 
 def test_transmission_rpc():
     client = transmission_rpc.Client(
-        host="172.17.0.1", port=9091, username="username", password="password"
+        host="127.0.0.1", port=9091, username="username", password="password"
     )
     assert client.get_session() is not None
     assert client.get_session().rpc_version > transmission_rpc_min_version
