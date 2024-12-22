@@ -12,9 +12,8 @@ config_schema_version = 1.1
 transmission_rpc_min_version = 16
 
 def test_config():
-    print("DDDDDD:")
 
-    print([*base_cmd, "generate-config"])
+    print("DDDDDDDDDDD:" + [*base_cmd, "generate-config"])
  
     result = subprocess.run(
         [*base_cmd, "generate-config"],
