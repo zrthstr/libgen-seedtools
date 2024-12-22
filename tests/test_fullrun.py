@@ -21,7 +21,8 @@ def test_config():
         capture_output=True,
         text=True,
     )
-    assert result.returncode == 0, f"Got:\n{result.stderr}"
+    #assert result.returncode == 0, f"Got:\n{result.stderr}"
+    assert result.returncode == 0
 
     with open(config_path, "r") as file:
         #print(file.read())
