@@ -13,6 +13,10 @@ transmission_rpc_min_version = 16
 
 def test_config():
 
+     print(os.listdir('/home/runner/work/libgen-seedtools/'))
+     print(os.listdir('/home/runner/work/libgen-seedtools/libgen-seedtools/'))
+     print(os.listdir('/home/runner/work/libgen-seedtools/libgen-seedtools/tests/'))
+
     print("DDDDDDDDDDD:", [*base_cmd, "generate-config"])
  
     result = subprocess.run(
