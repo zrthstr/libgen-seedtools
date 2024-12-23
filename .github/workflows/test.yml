@@ -2,6 +2,9 @@ name: Run Test
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - dev
 
 jobs:
   test:
