@@ -37,6 +37,6 @@ name = "testpypi"
 url = "https://test.pypi.org/simple/"
 publish-url = "https://test.pypi.org/legacy/"
 
-[build-system]
-requires = ["setuptools>=42"]
-build-backend = "setuptools.build_meta"
+#[build-system]
+#requires = ["setuptools>=42"]
+#build-backend = "setuptools.build_meta"
