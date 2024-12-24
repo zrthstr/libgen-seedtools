@@ -2,36 +2,29 @@ name: Release Test
 
 on:
   workflow_dispatch:
+#  push:
+#    tags:
+#      - v*
+
 
 jobs:
   pypi-publish:
     name: Publish to TestPyPI 🧪
     runs-on: ubuntu-latest
     environment:
-      name: pypi
+      name: pypi-test
       url: https://test.pypi.org/p/libgen-seedtools
     permissions:
       id-token: write
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-
-      - name: Install build dependencies
-        run: |
-          pip install build
-
-      - name: Build package
-        run: |
-          python -m build
-
-      - name: Publish package distributions to Test PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv build
+      ## Check that basic features work and we didn't miss to include crucial files
+      #- name: Smoke test (wheel)
+      #  run: uv run --isolated --no-project -p 3.13 --with dist/*.whl tests/smoke_test.py
+      #- name: Smoke test (source distribution)
+      #  run: uv run --isolated --no-project -p 3.13 --with dist/*.tar.gz tests/smoke_test.py
+      - run: uv publish --index ${{ inputs.repository-url }}  --trusted-publishing always
         with:
           repository-url: https://test.pypi.org/legacy/
-          skip-existing: true
