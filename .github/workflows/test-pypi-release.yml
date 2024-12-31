@@ -1,15 +1,15 @@
-name: Run Make Foo on Linux Distros
+name: test pypi testing release
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         #os: [ubuntu-latest, debian:latest, fedora:latest, centos:latest]
-        os: [ubuntu-latest]
+        os: [ubuntu:24.04]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
