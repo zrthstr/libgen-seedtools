@@ -1,0 +1,22 @@
+name: Run Make Foo on Linux Distros
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        #os: [ubuntu-latest, debian:latest, fedora:latest, centos:latest]
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Docker
+        uses: docker/setup-qemu-action@v2
+
+      - name: Run on Linux Distro
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/repo -w /repo ${{ matrix.os }} /bin/bash -c "make test_pypi_testing"
