@@ -19,5 +19,10 @@ test: rm_test_data
 	pwd
 	make transmission_up
 	rm ./tests/testconfig/config.json || true
+	uv build
 	uv run pytest
 	make transmission_down
+
+
+install_from_testing:
+	pip install -i https://test.pypi.org/simple/  --extra-index-url https://pypi.org/simple   libgen-seedtools==0.5.5
