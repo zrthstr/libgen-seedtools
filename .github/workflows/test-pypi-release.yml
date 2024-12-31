@@ -1,34 +1,65 @@
 name: test pypi testing release
-
 on:
+  #release:
+  #  types: [published]
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-24.04
+  test-install:
+    name: Test on ${{ matrix.image }}
+    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        os: ["ubuntu:24.04"]
+        image:
+          # Official Python images for different distributions
+          - python:3.11-slim
+          - python:3.10-slim
+          - python:3.9-slim
+          - python:3.8-slim
+          # Distribution-specific Python images
+          - python:3.11-alpine
+          - python:3.11-slim-bullseye
+          - python:3.11-slim-buster
+
+    container:
+      image: ${{ matrix.image }}
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Get version from pyproject.toml
         id: version
         run: |
-          pip install tomli;
+          # Install toml parser
+          pip install tomli
+          # Read version from pyproject.toml
           VERSION=$(python -c "
           import tomli
           with open('pyproject.toml', 'rb') as f:
-            data = tomli.load(f)
+              data = tomli.load(f)
           print(data['project']['version'])
           ")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "VERSION:$VERSION"
+          echo "VERSION=$VERSION"
 
-      - name: Set Up Docker
-        uses: docker/setup-qemu-action@v2
-
-      - name: Run on Linux Distro
+      - name: Install package
         run: |
-          docker run --rm -v ${{ github.workspace }}:/repo -w /repo ${{ matrix.os }} /bin/bash -c "make test_pypi_testing"
+          python -m pip install --upgrade pip
+          python -m pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple libgen-seedtools==${{ env.VERSION }}
+          python -c "
+          import subprocess
+          import sys
+          expected_version = '${{ env.VERSION }}'
+          result = subprocess.run(['libgen-seedtools', '--version'], capture_output=True, text=True)
+          installed_version = result.stdout.strip()
+          if expected_version not in installed_version:
+            print(f'Version mismatch! Expected {expected_version} but got {installed_version}')
+            sys.exit(1)
+          print(f'Version check passed: {installed_version}')"
+
+      - name: Report Status
+        if: always()
+        run: |
+          echo "Installation test completed on ${{ matrix.image }} for version ${{ env.VERSION }}"
