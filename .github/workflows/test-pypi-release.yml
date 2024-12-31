@@ -24,6 +24,7 @@ jobs:
           print(data['project']['version'])
           ")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "VERSION:$VERSION"
 
       - name: Set Up Docker
         uses: docker/setup-qemu-action@v2
