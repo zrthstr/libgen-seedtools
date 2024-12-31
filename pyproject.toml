@@ -29,8 +29,8 @@ Repository = "https://github.com/subdavis/libgen-seedtools"
 [project.scripts]
 libgen-seedtools = "libgen_seedtools.cli:cli"
 
-#[tool.uv]
-#package = true
+[tool.uv]
+package = true
 #publish-url = "https://test.pypi.org/legacy/"
 
 #[[tool.uv.index]]
