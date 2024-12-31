@@ -11,7 +11,19 @@ jobs:
         os: ["ubuntu:24.04"]
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Get version from pyproject.toml
+        id: version
+        run: |
+          pip install tomli;
+          VERSION=$(python -c "
+          import tomli
+          with open('pyproject.toml', 'rb') as f:
+            data = tomli.load(f)
+          print(data['project']['version'])
+          ")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Set Up Docker
         uses: docker/setup-qemu-action@v2
