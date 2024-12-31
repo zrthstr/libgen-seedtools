@@ -3,7 +3,7 @@ name = "libgen-seedtools"
 version = "0.5.6"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 authors=[{name="Brandon Davis" ,email="libgen-seedtools@subdavis.com"},{name="zrthstr"}]
 license = {text = "MIT License"}
 dependencies = [
