@@ -6,6 +6,7 @@ on:
 
 jobs:
   publish:
+    timeout-minutes: 60
     name: Publish to PyPI ✨
     runs-on: ubuntu-latest
     steps:
