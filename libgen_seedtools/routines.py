@@ -52,6 +52,7 @@ def load_torrent_data(
     return data
 
 
+
 def fetchall(ctx: Ctx, update_list=False, dry_run=False, auto_verify=False) -> None:
     settings = ctx.config.settings
     max_bytecount = humanfriendly.parse_size(settings.max_disk_usage)

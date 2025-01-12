@@ -178,7 +178,7 @@ wheels = [
 [[package]]
 name = "libgen-seedtools"
 version = "0.5.5"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "click-aliases" },
