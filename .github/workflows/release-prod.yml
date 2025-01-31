@@ -1,4 +1,4 @@
-name: Prod-Release
+name: release-prod
 
 on:
   workflow_dispatch:
@@ -12,9 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi-prod
-      url: https://test.pypi.org/p/libgen-seedtools
     env:
-      PUBLISH_URL: https://test.pypi.org/legacy/
+      PUBLISH_URL: https://pypi.org/legacy/
     permissions:
       id-token: write
     steps:
