@@ -15,8 +15,6 @@ transmission_down:
 	$(COMPOSE) down && true
 
 test: rm_test_data
-	echo "DEBUG: pwd -"
-	pwd
 	make transmission_up
 	rm ./tests/testconfig/config.json || true
 	uv build

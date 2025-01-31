@@ -2,7 +2,7 @@
 
 <img src="docs/seedtools.png" width="200">
 
-A python utility to fetch and seed a common dataset to both <s>IPFS and</s> a BitTorrent tracker. Designed to help individuals strengthen the Library Genesis collection, but written to be generally useful for mirroring between networks.
+A python utility to fetch and seed a common dataset. Designed to help individuals strengthen the Library Genesis collection, but written to be generally useful for mirroring between networks.
 
 
 ## Install
@@ -28,12 +28,6 @@ It also lowers the tedious burden of organization.  Start seeding in just a few 
 
 * **filter by minimum seeders**: Prioritize the files that need seeding the most.
 * **Set max disk usage**: Set a limit on disk usage
-
-The following are planned for the near future:
-
-* **Future: Clone a dataset**: Find files from a large dataset where some parts are available from ipfs and others from bittorrent.
-* <s>**Future: Mirror from BitTorrent to IPFS** - If you only have a .torrent file, this tool will clone it in IPFS.  However, if you only have a CID, this tool will not create a torrent file.</s>
-* **Future: meaningful metrics** - Get stats on how much you've seeded, and see how the network coverage changes over time.  Keep up with changing coverage by dropping well-seeded files and picking up more urgent ones.
 
 ## Usage
 

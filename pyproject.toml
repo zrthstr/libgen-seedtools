@@ -4,7 +4,8 @@ version = "0.5.7"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.8"
-authors=[{name="Brandon Davis" ,email="libgen-seedtools@subdavis.com"},{name="zrthstr"}]
+authors=[{name="Brandon Davis" ,email="libgen-seedtools@subdavis.com"},
+         {name="zrthstr", email="zrth1k@gmail.com"}]
 license = {text = "MIT License"}
 dependencies = [
     "click>=8.1.7",
