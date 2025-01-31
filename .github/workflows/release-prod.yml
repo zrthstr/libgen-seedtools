@@ -1,4 +1,4 @@
-name: release-dev
+name: Prod-Release
 
 on:
   workflow_dispatch:
@@ -8,10 +8,11 @@ on:
 
 jobs:
   pypi-publish:
-    name: Publish to TestPyPI 🧪
+    name: Publish to ProdPyPI 🪄🐍
     runs-on: ubuntu-latest
     environment:
-      name: pypi-test
+      name: pypi-prod
+      url: https://test.pypi.org/p/libgen-seedtools
     env:
       PUBLISH_URL: https://test.pypi.org/legacy/
     permissions:
