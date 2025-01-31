@@ -20,7 +20,7 @@ from .schemas import Ctx, load_config, save
     envvar="LIBGEN_SEEDTOOLS_CONFIG_PATH",
     type=click.Path(dir_okay=False, file_okay=True, writable=True, resolve_path=True),
 )
-@click.version_option()
+@click.version_option(package_name='lgst')
 @click.pass_context
 def cli(ctx, config):
     conf = load_config(config)

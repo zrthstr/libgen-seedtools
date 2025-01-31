@@ -1,6 +1,6 @@
 [project]
 name = "lgst"
-version = "0.5.10"
+version = "0.5.11"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -25,7 +25,7 @@ dev = [
 ]
 
 [project.urls]
-Repository = "https://github.com/subdavis/libgen-seedtools"
+Repository = "https://github.com/zrthstr/libgen-seedtools"
 
 [project.scripts]
 libgen-seedtools = "libgen_seedtools.cli:cli"
