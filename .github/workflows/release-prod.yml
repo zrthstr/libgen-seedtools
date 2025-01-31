@@ -13,7 +13,7 @@ jobs:
     environment:
       name: pypi-prod
     env:
-      PUBLISH_URL: https://pypi.org/legacy/
+      PUBLISH_URL: https://upload.pypi.org/legacy/
     permissions:
       id-token: write
     steps:
