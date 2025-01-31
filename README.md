@@ -8,9 +8,9 @@ A python utility to fetch and seed a common dataset. Designed to help individual
 ## Install
 
 ``` bash
-pipx install libgen-seedtools
+pipx install lgst
 # or
-pip3 install libgen-seedtools
+pip3 install lgst
 ```
 
 ## Why this was made
