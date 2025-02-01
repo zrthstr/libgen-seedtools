@@ -28,4 +28,4 @@ test_pypi_testing: install_from_testing
 
 install_from_testing:
 	echo VERSION=$(VERSION)
-	pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple libgen-seedtools==$(VERSION)
+	pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple lgst==$(VERSION)

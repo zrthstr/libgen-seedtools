@@ -70,7 +70,9 @@ If users all attempt to seed the most-needed files first, eventually the network
 ## Prerequisites
 
 * A transmission torrent server
-* <s>* An ipfs server</s>
+* A few GB of disk space
+* A bit of bandwith
+* Possibly a VPN
 
 If you aren't already running these, you can use the included docker-compose.  If you run these services on your own, you MUST have a shared data volume accessible from both services.
 
